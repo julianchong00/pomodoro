@@ -1,4 +1,4 @@
-module github.com/julianchong00/pomodoro-timer
+module github.com/julianchong00/pomodoro
 
 go 1.21.0
 

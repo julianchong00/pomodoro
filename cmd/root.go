@@ -8,8 +8,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/julianchong00/pomodoro-timer/config"
-	"github.com/julianchong00/pomodoro-timer/timer"
+	"github.com/julianchong00/pomodoro/config"
+	"github.com/julianchong00/pomodoro/timer"
 	"github.com/spf13/cobra"
 )
 

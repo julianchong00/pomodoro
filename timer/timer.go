@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/cheggaaa/pb/v3"
-	"github.com/julianchong00/pomodoro-timer/config"
+	"github.com/julianchong00/pomodoro/config"
 )
 
 const (
