@@ -8,6 +8,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/julianchong00/pomodoro/audio"
 	"github.com/julianchong00/pomodoro/config"
 	"github.com/julianchong00/pomodoro/timer"
 	"github.com/spf13/cobra"
@@ -84,7 +85,12 @@ func CreateTimer(cmd *cobra.Command, args []string) {
 		log.Panic(err)
 	}
 
-	err = timer.StartTimer(cfg)
+	audioStreamer, err := audio.NewAudioStream("./assets/beep.wav")
+	if err != nil {
+		log.Panic(err)
+	}
+
+	err = timer.StartTimer(cfg, audioStreamer)
 	if err != nil {
 		log.Panic(err)
 	}

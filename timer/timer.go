@@ -6,22 +6,29 @@ import (
 	"time"
 
 	"github.com/cheggaaa/pb/v3"
+	"github.com/faiface/beep/speaker"
+	"github.com/julianchong00/pomodoro/audio"
 	"github.com/julianchong00/pomodoro/config"
 )
 
 const (
 	workTmpl = `{{ red "Work Period" }} {{ bar . "<" "-" (cycle . "↖" "↗" "↘" "↙" ) "." ">"}} {{percent .}} {{string . "remaining_time"}}`
-	restTmpl = `{{ red "Rest Period" }} {{ bar . "<" "-" (cycle . "↖" "↗" "↘" "↙" ) "." ">"}} {{percent .}} {{string . "remaining_time"}}`
+	restTmpl = `{{ green "Rest Period" }} {{ bar . "<" "-" (cycle . "↖" "↗" "↘" "↙" ) "." ">"}} {{percent .}} {{string . "remaining_time"}}`
 
 	remainingTimeElement = "remaining_time"
 )
 
 // Start timer in background and make sound when duration runs out
-func StartTimer(cfg *config.TimerConfig) error {
+func StartTimer(cfg *config.TimerConfig, audioStreamer audio.AudioStream) error {
+	// Initialise speaker
+	speaker.Init(audioStreamer.Format.SampleRate, audioStreamer.Format.SampleRate.N(time.Second/10))
 
 	runProgressBar(cfg.WorkingDuration, true)
-
+	speaker.Play(audioStreamer.Streamer)
 	runProgressBar(cfg.RestingDuration, false)
+	speaker.Play(audioStreamer.Streamer)
+
+	fmt.Print("Pomodoro Timer Completed!")
 
 	return nil
 }
