@@ -1,6 +1,6 @@
 module github.com/julianchong00/pomodoro
 
-go 1.21.0
+go 1.23
 
 require (
 	emperror.dev/errors v0.8.1
